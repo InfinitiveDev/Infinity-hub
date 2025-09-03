@@ -1,4 +1,10 @@
 local player = game.Players.LocalPlayer
+
+local hub = player:FindFirstChild("PlayerGui"):FindFirstChild("InfiniteHubGUI")
+if hub then
+    hub:Destroy()
+end
+local player = game.Players.LocalPlayer
 local lighting = game:GetService("Lighting")
 
 -- Create Hub GUI
