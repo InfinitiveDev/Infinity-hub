@@ -39,4 +39,5 @@ closeBtn.Parent = hubPanel
 closeBtn.MouseButton1Click:Connect(function()
 	local gui = player:FindFirstChild("PlayerGui"):FindFirstChild("InfiniteHubGUI")
 	if gui then gui:Destroy() end
-end)
+loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/InjectButtons.lua")()
+	end)
