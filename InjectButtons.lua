@@ -28,5 +28,5 @@ statBtn.TextSize = 20
 statBtn.Parent = hubPanel
 
 statBtn.MouseButton1Click:Connect(function()
-	loadstring("PLACEHOLDER_MICROSTATEDITOR_CODE")()
+	loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/MicroStatEditor.lua")()
 end)
