@@ -13,7 +13,7 @@ tintBtn.TextSize = 20
 tintBtn.Parent = hubPanel
 
 tintBtn.MouseButton1Click:Connect(function()
-	loadstring("PLACEHOLDER_TINTCHANGER_CODE")()
+	loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/TintChanger.lua")()
 end)
 
 -- Micro Stat Editor Button
