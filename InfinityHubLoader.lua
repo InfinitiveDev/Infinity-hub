@@ -32,6 +32,7 @@ title.Font = Enum.Font.SourceSansBold
 title.TextSize = 24
 title.TextXAlignment = Enum.TextXAlignment.Left
 title.Parent = hubPanel
+loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/InjectButtons.lua")()
 
 local closeBtn = Instance.new("TextButton")
 closeBtn.Size = UDim2.new(0, 30, 0, 30)
@@ -46,5 +47,5 @@ closeBtn.Parent = hubPanel
 closeBtn.MouseButton1Click:Connect(function()
 	local gui = player:FindFirstChild("PlayerGui"):FindFirstChild("InfiniteHubGUI")
 	if gui then gui:Destroy() end
-loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/InjectButtons.lua")()
+
 	end)
