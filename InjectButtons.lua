@@ -46,5 +46,5 @@ mobilityBtn.Parent = hubPanel
 
 mobilityBtn.MouseButton1Click:Connect(function()
 
-	loadstring("PLACEHOLDER_MOBILITYRELIC_CODE")()
+	loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/MobilityRelic.lua")()
 end)
