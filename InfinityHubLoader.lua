@@ -1,4 +1,11 @@
 local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local hub = playerGui:FindFirstChild("InfiniteHubGUI")
+if hub then
+	hub:Destroy()
+end
+local player = game.Players.LocalPlayer
 
 local hubGui = Instance.new("ScreenGui")
 hubGui.Name = "InfiniteHubGUI"
