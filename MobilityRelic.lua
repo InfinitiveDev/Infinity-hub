@@ -1,14 +1,21 @@
 local player = game.Players.LocalPlayer
-local char = player.Character or player.CharacterAdded:Wait()
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Prevent duplicate GUI
+if playerGui:FindFirstChild("MobilityRelicGUI") then return end
+
+-- Create GUI
 local gui = Instance.new("ScreenGui")
 gui.Name = "MobilityRelicGUI"
 gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+gui.Parent = playerGui
 
+-- Create Panel
 local panel = Instance.new("Frame")
 panel.Size = UDim2.new(0, 240, 0, 160)
 panel.Position = UDim2.new(0.5, -120, 0.5, -80)
 panel.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+panel.BorderSizePixel = 0
 panel.Active = true
 panel.Draggable = true
 panel.Parent = gui
@@ -42,16 +49,19 @@ noclipToggle.TextSize = 18
 noclipToggle.Parent = panel
 
 local noclipActive = false
-local noclipScript
+local noclipScriptName = "NoclipRelic"
 
 noclipToggle.MouseButton1Click:Connect(function()
 	noclipActive = not noclipActive
 	noclipToggle.Text = "Toggle Noclip: " .. (noclipActive and "ON" or "OFF")
 
+	local existing = playerGui:FindFirstChild(noclipScriptName)
+	if existing then existing:Destroy() end
+
 	if noclipActive then
-		noclipScript = Instance.new("LocalScript")
-		noclipScript.Name = "NoclipRelic"
-		noclipScript.Source = [[
+		local script = Instance.new("LocalScript")
+		script.Name = noclipScriptName
+		script.Source = [[
 			local player = game.Players.LocalPlayer
 			local RunService = game:GetService("RunService")
 
@@ -66,16 +76,13 @@ noclipToggle.MouseButton1Click:Connect(function()
 				end
 			end)
 		]]
-		noclipScript.Parent = player:WaitForChild("PlayerGui")
-	else
-		local existing = player:FindFirstChild("PlayerGui"):FindFirstChild("NoclipRelic")
-		if existing then existing:Destroy() end
+		script.Parent = playerGui
 	end
 end)
 
 yOffset += 40
 
--- Wall Climber Toggle
+-- Wall Climb Toggle
 local climbToggle = Instance.new("TextButton")
 climbToggle.Size = UDim2.new(0, 220, 0, 30)
 climbToggle.Position = UDim2.new(0, 10, 0, yOffset)
@@ -87,13 +94,38 @@ climbToggle.TextSize = 18
 climbToggle.Parent = panel
 
 local climbActive = false
-local climbScript
+local climbScriptName = "ClimbRelic"
 
 climbToggle.MouseButton1Click:Connect(function()
 	climbActive = not climbActive
 	climbToggle.Text = "Toggle Climb: " .. (climbActive and "ON" or "OFF")
 
+	local existing = playerGui:FindFirstChild(climbScriptName)
+	if existing then existing:Destroy() end
+
 	if climbActive then
-		climbScript = Instance.new("LocalScript")
-		climbScript.Name = "ClimbRelic"
-		climbScript.Source
+		local script = Instance.new("LocalScript")
+		script.Name = climbScriptName
+		script.Source = [[
+			local player = game.Players.LocalPlayer
+			local RunService = game:GetService("RunService")
+
+			RunService.Stepped:Connect(function()
+				local char = player.Character
+				if not char then return end
+				local head = char:FindFirstChild("Head")
+				local root = char:FindFirstChild("HumanoidRootPart")
+				if not head or not root then return end
+
+				for _, part in pairs(workspace:GetDescendants()) do
+					if part:IsA("BasePart") and not part:IsDescendantOf(char) then
+						if (head.Position - part.Position).Magnitude < 2 or (root.Position - part.Position).Magnitude < 2 then
+							char:SetPrimaryPartCFrame(part.CFrame + Vector3.new(0, part.Size.Y + 3, 0))
+						end
+					end
+				end
+			end)
+		]]
+		script.Parent = playerGui
+	end
+end)
