@@ -29,4 +29,22 @@ statBtn.Parent = hubPanel
 
 statBtn.MouseButton1Click:Connect(function()
 	loadstring("https://raw.githubusercontent.com/InfinitiveDev/Infinity-hub/refs/heads/main/MicroStatEditor.lua")()
+end) 
+-- Resize hub to fit new button
+hubPanel.Size = UDim2.new(0, 300, 0, 140)
+
+-- Mobility Relic Button
+local mobilityBtn = Instance.new("TextButton")
+mobilityBtn.Size = UDim2.new(0, 280, 0, 40)
+mobilityBtn.Position = UDim2.new(0, 10, 0, 130)
+mobilityBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 100)
+mobilityBtn.Text = "Mobility Relic"
+mobilityBtn.TextColor3 = Color3.new(0, 0, 0)
+mobilityBtn.Font = Enum.Font.SourceSansBold
+mobilityBtn.TextSize = 20
+mobilityBtn.Parent = hubPanel
+
+mobilityBtn.MouseButton1Click:Connect(function()
+
+	loadstring("PLACEHOLDER_MOBILITYRELIC_CODE")()
 end)
